@@ -1,0 +1,36 @@
+extends ../layout
+block head 
+ link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
+
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+    h2
+      i.fas.fa-map-marked
+      |  Climbing Gyms
+  .pb-2.mt-2.mt-4
+ 
+  div(style='display:flex; justify-content: center;')
+    #map(style='width: 100vw; height: 60vh')
+
+
+  .pb-2.mt-2.mb-4
+    .row  
+      - for (i in gym)
+          .col-md-4
+            .card(style='background-color: #00abf0').mb-3
+              .card-body
+                img(src='https://i.imgur.com/aRc6LUJ.png', height=40)
+                b|  !{gym[i].name}
+
+  script( src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js", type='text/javascript', charset='utf-8')
+  script.
+    let gym = JSON.parse(`!{JSON.stringify(gym)}`);
+    var map = L.map('map').setView([51.046880, 4.328260], 10);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+    }).addTo(map);
+    for (i in gym) {
+      L.marker([gym[i].lat, gym[i].lon]).addTo(map).bindPopup("<b>"+gym[i].name+"</b><br>"+gym[i].lat+", " + gym[i].lon + "</b><br><a href='/gyms/"+gym[i].name+"'> More Info </a>" );
+    };

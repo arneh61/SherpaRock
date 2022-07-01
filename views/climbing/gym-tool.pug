@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Register climbing gym
+  form(id='register-form', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row.mb-3
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='gymname') Name
+      .col-md-7
+        input.form-control(type='text', name='gymname', id='gymname', placeholder='name', autofocus, required)
+    .form-group.row.mb-3
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='latitude') Latitude
+      .col-md-7
+        input.form-control(type='text', name='latitude', id='latitude', placeholder='latitude',  required)
+    .form-group.row.mb-3
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='longitude') Longitude
+      .col-md-7
+        input.form-control(type='text', name='longitude', id='longitude', placeholder='longitude', required)
+    .form-group.offset-sm-3.col-md-7.pl-2
+      button.btn.btn-success(type='submit')
+        i.fas.fa-plus.fa-sm
+        | Register Gym

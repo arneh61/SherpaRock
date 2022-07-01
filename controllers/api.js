@@ -27,6 +27,14 @@ exports.getApi = (req, res) => {
   });
 };
 
+
+
+exports.getMap = (req, res) => {
+  res.render('api/index', {
+    title: 'map'
+  });
+};
+
 /**
  * GET /api/foursquare
  * Foursquare API example.
